@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Robot from "../assets/robot.gif";
 export default function Welcome() {
   const [userName, setUserName] = useState("");
-  useEffect(async () => {
+  useEffect(() => {
     const stored = localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY);
     if (stored) {
       const parsed = JSON.parse(stored);
