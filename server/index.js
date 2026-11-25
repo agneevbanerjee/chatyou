@@ -37,12 +37,13 @@ app.get("/api/avatar/:id", (req, res) => {
   });
 });
 
-const server = app.listen(process.env.PORT, () =>
-  console.log(`Server started on ${process.env.PORT}`)
+const PORT = process.env.PORT || 5000;
+const server = app.listen(PORT, () =>
+  console.log(`Server started on ${PORT}`)
 );
 const io = socket(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: process.env.CLIENT_ORIGIN || true,
     credentials: true,
   },
 });
