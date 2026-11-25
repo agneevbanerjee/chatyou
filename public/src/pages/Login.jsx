@@ -42,21 +42,28 @@ export default function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (validateForm()) {
-      const { username, password } = values;
-      const { data } = await axios.post(loginRoute, {
-        username,
-        password,
-      });
-      if (data.status === false) {
-        toast.error(data.msg, toastOptions);
-      }
-      if (data.status === true) {
-        localStorage.setItem(
-          process.env.REACT_APP_LOCALHOST_KEY,
-          JSON.stringify(data.user)
-        );
+      try {
+        const { username, password } = values;
+        const { data } = await axios.post(loginRoute, {
+          username,
+          password,
+        });
+        if (data.status === false) {
+          toast.error(data.msg, toastOptions);
+        }
+        if (data.status === true) {
+          localStorage.setItem(
+            process.env.REACT_APP_LOCALHOST_KEY,
+            JSON.stringify(data.user)
+          );
 
-        navigate("/");
+          navigate("/");
+        }
+      } catch (err) {
+        toast.error(
+          "Unable to connect to server. Please ensure the backend is running.",
+          toastOptions
+        );
       }
     }
   };
@@ -67,7 +74,7 @@ export default function Login() {
         <form action="" onSubmit={(event) => handleSubmit(event)}>
           <div className="brand">
             <img src={Logo} alt="logo" />
-            <h1>FutureFinders</h1>
+            <h1>ChatYou</h1>
           </div>
           <input
             type="text"
@@ -119,10 +126,13 @@ const FormContainer = styled.div`
   form {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
+    width: min(90vw, 440px);
     background-color: #00000076;
-    border-radius: 2rem;
-    padding: 5rem;
+    border-radius: 1.5rem;
+    border: 1px solid #ffffff14;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+    padding: 2.5rem 3rem;
   }
   input {
     background-color: transparent;
@@ -147,8 +157,9 @@ const FormContainer = styled.div`
     border-radius: 0.4rem;
     font-size: 1rem;
     text-transform: uppercase;
+    transition: background-color 0.2s ease;
     &:hover {
-      background-color: #4e0eff;
+      background-color: #6c47ff;
     }
   }
   span {

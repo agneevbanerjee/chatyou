@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import ChatInput from "./ChatInput";
-import Logout from "./Logout";
-import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import { sendMessageRoute, recieveMessageRoute } from "../utils/APIRoutes";
 
@@ -86,18 +84,17 @@ export default function ChatContainer({ currentChat, socket }) {
             <h3>{currentChat.username}</h3>
           </div>
         </div>
-        <Logout />
       </div>
       <div className="chat-messages">
-        {messages.map((message) => {
+        {messages.map((message, index) => {
           return (
-            <div ref={scrollRef} key={uuidv4()}>
+            <div ref={scrollRef} key={message._id || index}>
               <div
                 className={`message ${
                   message.fromSelf ? "sended" : "recieved"
                 }`}
               >
-                <div className="content ">
+                <div className="content">
                   <p>{message.message}</p>
                 </div>
               </div>
@@ -112,41 +109,42 @@ export default function ChatContainer({ currentChat, socket }) {
 
 const Container = styled.div`
   display: grid;
-  grid-template-rows: 10% 80% 10%;
-  gap: 0.1rem;
+  grid-template-rows: 64px 1fr 76px;
   overflow: hidden;
-  @media screen and (min-width: 720px) and (max-width: 1080px) {
-    grid-template-rows: 15% 70% 15%;
-  }
+  min-height: 0;
   .chat-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 2rem;
+    padding: 0 1.5rem;
+    background-color: #080420;
+    border-bottom: 1px solid #ffffff14;
     .user-details {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 0.9rem;
       .avatar {
         img {
-          height: 3rem;
+          height: 2.75rem;
         }
       }
       .username {
         h3 {
           color: white;
+          font-size: 1.05rem;
         }
       }
     }
   }
   .chat-messages {
-    padding: 1rem 2rem;
+    padding: 1.25rem 1.75rem;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    overflow: auto;
+    gap: 0.85rem;
+    overflow-y: auto;
+    min-height: 0;
     &::-webkit-scrollbar {
-      width: 0.2rem;
+      width: 0.25rem;
       &-thumb {
         background-color: #ffffff39;
         width: 0.1rem;
@@ -157,27 +155,32 @@ const Container = styled.div`
       display: flex;
       align-items: center;
       .content {
-        max-width: 40%;
+        max-width: 65%;
         overflow-wrap: break-word;
-        padding: 1rem;
-        font-size: 1.1rem;
+        padding: 0.75rem 1.1rem;
+        font-size: 1rem;
+        line-height: 1.4;
         border-radius: 1rem;
-        color: #d1d1d1;
+        color: #ebe7ff;
         @media screen and (min-width: 720px) and (max-width: 1080px) {
-          max-width: 70%;
+          max-width: 75%;
         }
       }
     }
     .sended {
       justify-content: flex-end;
       .content {
-        background-color: #4f04ff21;
+        background-color: #4e0eff;
+        color: #ffffff;
+        border-bottom-right-radius: 0.25rem;
       }
     }
     .recieved {
       justify-content: flex-start;
       .content {
-        background-color: #9900ff20;
+        background-color: #ffffff1a;
+        color: #ebe7ff;
+        border-bottom-left-radius: 0.25rem;
       }
     }
   }

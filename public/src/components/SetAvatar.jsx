@@ -81,6 +81,7 @@ export default function SetAvatar() {
             {avatars.map((avatar, index) => {
               return (
                 <div
+                  key={avatar}
                   className={`avatar ${
                     selectedAvatar === index ? "selected" : ""
                   }`}
@@ -88,7 +89,6 @@ export default function SetAvatar() {
                   <img
                     src={`data:image/svg+xml;base64,${avatar}`}
                     alt="avatar"
-                    key={avatar}
                     onClick={() => setSelectedAvatar(index)}
                   />
                 </div>
@@ -135,10 +135,11 @@ const Container = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      transition: 0.5s ease-in-out;
+      cursor: pointer;
+      transition: 0.3s ease-in-out;
       img {
         height: 6rem;
-        transition: 0.5s ease-in-out;
+        transition: 0.3s ease-in-out;
       }
     }
     .selected {
@@ -155,8 +156,9 @@ const Container = styled.div`
     border-radius: 0.4rem;
     font-size: 1rem;
     text-transform: uppercase;
+    transition: background-color 0.2s ease;
     &:hover {
-      background-color: #4e0eff;
+      background-color: #6c47ff;
     }
   }
 `;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Logo from "../assets/logo.svg";
+import Logout from "./Logout";
 
 export default function Contacts({ contacts, changeChat }) {
   const [currentUserName, setCurrentUserName] = useState(undefined);
@@ -52,15 +53,18 @@ export default function Contacts({ contacts, changeChat }) {
             })}
           </div>
           <div className="current-user">
-            <div className="avatar">
-              <img
-                src={`data:image/svg+xml;base64,${currentUserImage}`}
-                alt="avatar"
-              />
+            <div className="user-info">
+              <div className="avatar">
+                <img
+                  src={`data:image/svg+xml;base64,${currentUserImage}`}
+                  alt="avatar"
+                />
+              </div>
+              <div className="username">
+                <h2>{currentUserName}</h2>
+              </div>
             </div>
-            <div className="username">
-              <h2>{currentUserName}</h2>
-            </div>
+            <Logout showLabel />
           </div>
         </Container>
       )}
@@ -69,30 +73,35 @@ export default function Contacts({ contacts, changeChat }) {
 }
 const Container = styled.div`
   display: grid;
-  grid-template-rows: 10% 75% 15%;
+  grid-template-rows: 64px 1fr 76px;
   overflow: hidden;
   background-color: #080420;
+  border-right: 1px solid #ffffff14;
+  min-height: 0;
   .brand {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.85rem;
     justify-content: center;
+    border-bottom: 1px solid #ffffff14;
     img {
       height: 2rem;
     }
     h3 {
       color: white;
       text-transform: uppercase;
+      letter-spacing: 0.05rem;
     }
   }
   .contacts {
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow: auto;
-    gap: 0.8rem;
+    overflow-y: auto;
+    padding: 0.75rem 0;
+    gap: 0.65rem;
     &::-webkit-scrollbar {
-      width: 0.2rem;
+      width: 0.25rem;
       &-thumb {
         background-color: #ffffff39;
         width: 0.1rem;
@@ -100,55 +109,73 @@ const Container = styled.div`
       }
     }
     .contact {
-      background-color: #ffffff34;
-      min-height: 5rem;
+      background-color: #ffffff14;
+      min-height: 4.25rem;
       cursor: pointer;
       width: 90%;
-      border-radius: 0.2rem;
-      padding: 0.4rem;
+      border-radius: 0.6rem;
+      padding: 0.5rem 0.85rem;
       display: flex;
-      gap: 1rem;
+      gap: 0.9rem;
       align-items: center;
-      transition: 0.5s ease-in-out;
+      transition: background-color 0.2s ease-in-out;
+      &:hover {
+        background-color: #ffffff24;
+      }
       .avatar {
+        flex-shrink: 0;
         img {
-          height: 3rem;
+          height: 2.75rem;
         }
       }
       .username {
+        min-width: 0;
         h3 {
           color: white;
+          font-size: 1rem;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
       }
     }
     .selected {
       background-color: #9a86f3;
+      &:hover {
+        background-color: #9a86f3;
+      }
     }
   }
 
   .current-user {
     background-color: #0d0d30;
+    border-top: 1px solid #ffffff14;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 2rem;
+    padding: 0 1rem;
+    gap: 0.75rem;
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      min-width: 0;
+    }
     .avatar {
+      flex-shrink: 0;
       img {
-        height: 4rem;
+        height: 3rem;
         max-inline-size: 100%;
       }
     }
     .username {
+      min-width: 0;
       h2 {
         color: white;
-      }
-    }
-    @media screen and (min-width: 720px) and (max-width: 1080px) {
-      gap: 0.5rem;
-      .username {
-        h2 {
-          font-size: 1rem;
-        }
+        font-size: 1.05rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
     }
   }

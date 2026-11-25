@@ -51,12 +51,14 @@ export default function ChatInput({ handleSendMsg }) {
 const Container = styled.div`
   display: grid;
   align-items: center;
-  grid-template-columns: 5% 95%;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
   background-color: #080420;
-  padding: 0 2rem;
+  border-top: 1px solid #ffffff14;
+  padding: 0 1.5rem;
   @media screen and (min-width: 720px) and (max-width: 1080px) {
     padding: 0 1rem;
-    gap: 1rem;
+    gap: 0.75rem;
   }
   .button-container {
     display: flex;
@@ -65,6 +67,8 @@ const Container = styled.div`
     gap: 1rem;
     .emoji {
       position: relative;
+      display: flex;
+      align-items: center;
       svg {
         font-size: 1.5rem;
         color: #ffff00c8;
@@ -73,6 +77,7 @@ const Container = styled.div`
       .emoji-picker-react {
         position: absolute;
         top: -350px;
+        z-index: 10;
         background-color: #080420;
         box-shadow: 0 5px 10px #9a86f3;
         border-color: #9a86f3;
@@ -103,16 +108,15 @@ const Container = styled.div`
     border-radius: 2rem;
     display: flex;
     align-items: center;
-    gap: 2rem;
-    background-color: #ffffff34;
+    gap: 0.75rem;
+    padding: 0.3rem 0.35rem 0.3rem 1.25rem;
+    background-color: #ffffff24;
     input {
-      width: 90%;
-      height: 60%;
+      flex: 1;
       background-color: transparent;
       color: white;
       border: none;
-      padding-left: 1rem;
-      font-size: 1.2rem;
+      font-size: 1.05rem;
 
       &::selection {
         background-color: #9a86f3;
@@ -122,21 +126,26 @@ const Container = styled.div`
       }
     }
     button {
-      padding: 0.3rem 2rem;
+      padding: 0.45rem 1.4rem;
       border-radius: 2rem;
       display: flex;
       justify-content: center;
       align-items: center;
       background-color: #9a86f3;
       border: none;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      &:hover {
+        background-color: #7c66e3;
+      }
       @media screen and (min-width: 720px) and (max-width: 1080px) {
-        padding: 0.3rem 1rem;
+        padding: 0.4rem 1rem;
         svg {
-          font-size: 1rem;
+          font-size: 1.25rem;
         }
       }
       svg {
-        font-size: 2rem;
+        font-size: 1.5rem;
         color: white;
       }
     }

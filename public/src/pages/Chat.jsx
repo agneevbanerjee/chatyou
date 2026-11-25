@@ -77,13 +77,17 @@ const Container = styled.div`
   align-items: center;
   background-color: #131324;
   .container {
-    height: 85vh;
-    width: 85vw;
+    height: 88vh;
+    width: min(92vw, 1280px);
     background-color: #00000076;
+    border-radius: 1rem;
+    border: 1px solid #ffffff14;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+    overflow: hidden;
     display: grid;
-    grid-template-columns: 25% 75%;
+    grid-template-columns: minmax(250px, 28%) 1fr;
     @media screen and (min-width: 720px) and (max-width: 1080px) {
-      grid-template-columns: 35% 65%;
+      grid-template-columns: minmax(230px, 35%) 1fr;
     }
   }
 `;

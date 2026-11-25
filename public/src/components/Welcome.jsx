@@ -27,10 +27,19 @@ const Container = styled.div`
   align-items: center;
   color: white;
   flex-direction: column;
+  text-align: center;
+  padding: 2rem;
+  gap: 0.75rem;
   img {
-    height: 20rem;
+    max-height: 18rem;
+    max-width: 85%;
+    height: auto;
+  }
+  h3 {
+    color: #b8b8d1;
+    font-weight: 400;
   }
   span {
-    color: #4e0eff;
+    color: #9a86f3;
   }
 `;
